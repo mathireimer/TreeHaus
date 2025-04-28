@@ -1,6 +1,6 @@
 # TreeHaus
 
-Este proyecto es una página web desarrollada con [especificar tecnología: React, Next.js, Vue, etc.].  
+Este proyecto es una página web desarrollada con React.  
 A continuación encontrarás las instrucciones para instalar, desarrollar y publicar el sitio tanto en Windows como en Mac.
 
 ---
@@ -41,7 +41,13 @@ Esto instalará todas las dependencias necesarias listadas en `package.json`.
 Para iniciar el servidor de desarrollo y ver la página localmente:
 
 ```bash
-npm run dev
+npm start
+```
+
+Para ejecutar el codigo python:
+
+```bash
+python server.py
 ```
 
 Luego abre tu navegador y visita:  
