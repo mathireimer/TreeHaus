@@ -7,12 +7,13 @@ function App() {
   const [area, setArea] = useState("");
   const [deltaT, setDeltaT] = useState("");
   const [materiales, setMateriales] = useState([
-    { conductividad: "", espesor: "" },  // Suelo
-    { conductividad: "", espesor: "" },  // Paredes
-    { conductividad: "", espesor: "" },  // Techo
-    { conductividad: "", espesor: "" }   // Abertura
+    { conductividad: "", espesor: "" },
+    { conductividad: "", espesor: "" },
+    { conductividad: "", espesor: "" },
+    { conductividad: "", espesor: "" }
   ]);
   const [resultados, setResultados] = useState([]);
+  const [cajas, setCajas] = useState([]); // NUEVO ESTADO
   const [error, setError] = useState(null);
   const [archivoNombre, setArchivoNombre] = useState("");
   const fileInputRef = useRef();
@@ -28,14 +29,14 @@ function App() {
     return valor.toFixed(decimales);
   };
 
-  const enviarDatos = async () => {
+  const enviarDatos = () => {
     setError(null);
     if (!nombre || !area || !deltaT || materiales.some(m => !m.conductividad || !m.espesor)) {
       setError("Por favor, complete todos los campos");
       return;
     }
 
-    const caja = {
+    const nuevaCaja = {
       nombre: nombre,
       area: parseFloat(area),
       delta_t: parseFloat(deltaT),
@@ -45,14 +46,32 @@ function App() {
       }))
     };
 
+    setCajas(prev => [...prev, nuevaCaja]);
+    setNombre("");
+    setArea("");
+    setDeltaT("");
+    setMateriales([
+      { conductividad: "", espesor: "" },
+      { conductividad: "", espesor: "" },
+      { conductividad: "", espesor: "" },
+      { conductividad: "", espesor: "" }
+    ]);
+  };
+
+  const calcularTodo = async () => {
+    if (cajas.length === 0) {
+      setError("No hay cajas para calcular");
+      return;
+    }
+
     try {
       const res = await fetch("http://127.0.0.1:5000/calcular", {
         method: "POST",
-        headers: { 
+        headers: {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: JSON.stringify({ cajas: [caja] })
+        body: JSON.stringify({ cajas })
       });
 
       if (!res.ok) {
@@ -61,12 +80,18 @@ function App() {
       }
 
       const data = await res.json();
-      setResultados(prev => [...prev, ...data]);
+      setResultados(data);
+      setError(null);
     } catch (error) {
       setError(error.message);
       setResultados([]);
     }
   };
+
+  const vaciarCajas = () => {
+    setCajas([]);
+  };
+  
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
@@ -80,7 +105,7 @@ function App() {
       const sheet = workbook.Sheets["Entrada"];
       const json = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "" });
       const filas = json.slice(3).filter(row => row[0] !== "");
-      const cajas = filas.map(row => ({
+      const cajasExcel = filas.map(row => ({
         nombre: row[0],
         area: parseFloat(row[1]),
         delta_t: parseFloat(row[2]),
@@ -91,26 +116,11 @@ function App() {
           { conductividad: parseFloat(row[9]), espesor_mm: parseFloat(row[10]) }
         ]
       }));
-      enviarCajasAlBackend(cajas);
+      setCajas(cajasExcel);
     };
     reader.readAsArrayBuffer(file);
   };
 
-  const enviarCajasAlBackend = async (cajas) => {
-    try {
-      const res = await fetch("http://127.0.0.1:5000/calcular", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cajas })
-      });
-      const data = await res.json();
-      setResultados(prev => [...prev, ...data]);
-    } catch (error) {
-      setError("Error al procesar el archivo");
-    }
-  };
-
-  // Exportar resultados a Excel
   const exportarExcel = () => {
     if (!resultados.length) return;
     const wsData = [
@@ -137,10 +147,9 @@ function App() {
     <div style={{ maxWidth: 1100, margin: "0 auto", padding: 20 }}>
       <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 24 }}>Calculadora de Eficiencia Térmica</h2>
       <div style={{ display: 'flex', gap: 40, alignItems: 'flex-start', flexWrap: 'wrap' }}>
-        {/* -------- Formulario -------- */}
         <div style={{ flex: 1, minWidth: 320 }}>
           <a
-            href="/plantilla_calculadora_eficiencia_termica_estilo.xlsx"
+            href="\plantilla_calculadora_eficiencia_termica.xlsx"
             download
             className="btn-primary"
             style={{ marginBottom: 20, display: "inline-block" }}
@@ -148,7 +157,6 @@ function App() {
             Descargar plantilla Excel
           </a>
           <br />
-          {/* Botón de subir archivo estilizado */}
           <div style={{ marginBottom: 20 }}>
             <label htmlFor="file-upload" className="btn-primary" style={{ cursor: 'pointer', display: 'inline-block', padding: '8px 24px' }}>
               Subir archivo Excel
@@ -193,11 +201,13 @@ function App() {
           />
 
           <h4 style={{ fontSize: 18, fontWeight: 600, margin: '20px 0 10px 0' }}>Materiales:</h4>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {["Suelo", "Paredes", "Techo", "Abertura"].map((nombre, i) => (
-              <>
-                <div key={"c"+i}>
-                  <label style={{ display: 'block', fontSize: 14, marginBottom: 4 }}>Conductividad {nombre} (W/m·K):</label>
+              <div key={i} style={{ display: 'flex', gap: 20 }}>
+                <div style={{ flex: 1 }}>
+                  <label style={{ display: 'block', fontSize: 14, marginBottom: 4 }}>
+                    Conductividad {nombre} (W/m·K):
+                  </label>
                   <input
                     type="number"
                     value={materiales[i].conductividad}
@@ -205,8 +215,10 @@ function App() {
                     className="input"
                   />
                 </div>
-                <div key={"e"+i}>
-                  <label style={{ display: 'block', fontSize: 14, marginBottom: 4 }}>Espesor {nombre} (mm):</label>
+                <div style={{ flex: 1 }}>
+                  <label style={{ display: 'block', fontSize: 14, marginBottom: 4 }}>
+                    Espesor {nombre} (mm):
+                  </label>
                   <input
                     type="number"
                     value={materiales[i].espesor}
@@ -214,20 +226,33 @@ function App() {
                     className="input"
                   />
                 </div>
-              </>
+              </div>
             ))}
           </div>
 
+          <p style={{ fontSize: 14, color: '#333', marginTop: 10 }}>
+            Cajas cargadas: {cajas.length}
+          </p>
+
           <button onClick={enviarDatos} className="btn-primary" style={{ marginTop: 18 }}>
+            Agregar caja
+          </button>
+
+          <button onClick={calcularTodo} className="btn-primary" style={{ marginTop: 18, marginLeft: 16 }}>
             Calcular
           </button>
-          {/* Botón para exportar resultados */}
+
           <button onClick={exportarExcel} className="btn-primary" style={{ marginTop: 18, marginLeft: 16 }}>
             Exportar resultados a Excel
           </button>
+          <button
+          onClick={vaciarCajas}
+          className="btn-primary"
+          style={{ marginTop: 18, marginLeft: 16, backgroundColor: '#fbbf24' }}>
+            Vaciar cajas
+          </button>
         </div>
 
-        {/* -------- Esquema 3D -------- */}
         <div style={{ width: 220, minWidth: 180, margin: '0 auto' }}>
           <WallAssembly3D />
         </div>
