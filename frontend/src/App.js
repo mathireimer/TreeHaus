@@ -1,8 +1,11 @@
 import { useState, useRef } from "react";
 import * as XLSX from "xlsx";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import WallAssembly3D from './components/WallAssembly3D';
+import './App.css';
 
-function App() {
+function Calculadora() {
   const [nombre, setNombre] = useState("");
   const [area, setArea] = useState("");
   const [deltaT, setDeltaT] = useState("");
@@ -144,7 +147,7 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: 1100, margin: "0 auto", padding: 20 }}>
+    <div style={{ maxWidth: 1100, margin: "0 auto", padding: 20, marginTop: "80px" }}>
       <h2 style={{ fontSize: 28, fontWeight: 700, marginBottom: 24 }}>Calculadora de Eficiencia Térmica</h2>
       <div style={{ display: 'flex', gap: 40, alignItems: 'flex-start', flexWrap: 'wrap' }}>
         <div style={{ flex: 1, minWidth: 320 }}>
@@ -292,6 +295,38 @@ function App() {
         </div>
       )}
     </div>
+  );
+}
+
+function SobreElDesafio() {
+  return (
+    <div style={{ maxWidth: 1100, margin: "0 auto", padding: 20, marginTop: "80px" }}>
+      <h2>Sobre el Desafío</h2>
+      <p>Contenido sobre el desafío...</p>
+    </div>
+  );
+}
+
+function ThreeHaus() {
+  return (
+    <div style={{ maxWidth: 1100, margin: "0 auto", padding: 20, marginTop: "80px" }}>
+      <h2>ThreeHaus</h2>
+      <p>Contenido sobre ThreeHaus...</p>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Calculadora />} />
+        <Route path="/calculadora" element={<Calculadora />} />
+        <Route path="/sobre-el-desafio" element={<SobreElDesafio />} />
+        <Route path="/threehaus" element={<ThreeHaus />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

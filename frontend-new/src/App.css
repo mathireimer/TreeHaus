@@ -1,0 +1,86 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.content {
+  width: 100%;
+  padding-top: 60px;
+}
+
+.section {
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+/* Estilos básicos de texto */
+h1, h2, h3, h4 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.2rem; }
+
+p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+/* Estilos de secciones */
+#home {
+  background: #f5f7fa;
+}
+
+#calculadora {
+  background: #ffffff;
+}
+
+#sobre-el-desafio {
+  background: #e0eafc;
+}
+
+#threehaus {
+  background: #f6f9fc;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .section {
+    padding: 10px;
+  }
+  
+  .container {
+    padding: 10px;
+  }
+  
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.8rem; }
+  h3 { font-size: 1.3rem; }
+  h4 { font-size: 1.1rem; }
+}
