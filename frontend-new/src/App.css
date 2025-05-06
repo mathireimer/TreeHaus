@@ -12,13 +12,15 @@ body {
 
 .app {
   width: 100%;
-  min-height: 100vh;
-  overflow-y: auto;
+  /* min-height: 100vh; */ /* Eliminado para que el scroll sea en el body */
+  /* overflow-y: auto; */  /* Eliminado para que el scroll sea en el body */
 }
 
 .content {
   width: 100%;
-  padding-top: 60px;
+  /* overflow-y: auto; */  /* Eliminado para que el scroll sea en el body */
+  /* min-height: 100vh; */ /* Eliminado para que el scroll sea en el body */
+  padding-top: 0px;
 }
 
 .section {
@@ -28,6 +30,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  scroll-margin-top: 90px; /* Ajusta este valor según la altura real del navbar flotante */
 }
 
 .container {
@@ -52,10 +55,7 @@ p {
   line-height: 1.5;
 }
 
-/* Estilos de secciones */
-#home {
-  background: #f5f7fa;
-}
+/* Estilos de secciones *
 
 #calculadora {
   background: #ffffff;
