@@ -41,7 +41,7 @@ const App: React.FC = () => {
               zIndex: 2
             }}
           />
-          <div className="container" style={{ position: "relative", zIndex: 3 }}>
+          <div className="container" style={{ position: "relative", zIndex: 3, padding: "48px 32px", borderRadius: "24px", background: "rgba(0,0,0,0.10)" }}>
             <h1 style={{ color: "#fff", textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
               Transformando la construcción con datos inteligentes
             </h1>
@@ -53,16 +53,13 @@ const App: React.FC = () => {
             </p>
             <div className="features">
               <div className="feature">
-                <span className="feature-icon">✔</span>
-                <span style={{ color: "#fff" }}>Fácil de usar</span>
+                <span style={{ color: "#fff" }}>✔ Fácil de usar</span>
               </div>
-              <div className="feature">
-                <span className="feature-icon">✔</span>
-                <span style={{ color: "#fff" }}>Basado en modelos científicos</span>
+              <div className="feature">                
+                <span style={{ color: "#fff" }}>✔ Basado en modelos científicos</span>
               </div>
-              <div className="feature">
-                <span className="feature-icon">✔</span>
-                <span style={{ color: "#fff" }}>Adaptable a diferentes regiones climáticas</span>
+              <div className="feature">                
+                <span style={{ color: "#fff" }}>✔ Adaptable a diferentes regiones climáticas</span>
               </div>
             </div>
           </div>
@@ -156,15 +153,15 @@ const App: React.FC = () => {
               </p>
               <h3>¿Cómo intervino nuestro software?</h3>
               <ul>
-                <li>
-                  Permitimos comparar el desempeño térmico de las tres cajas en relación con una línea de base definida por la estructura con el menor rendimiento de aislamiento térmico.
-                </li>
-                <li>
-                  Visualizamos la pérdida de masa del hielo, la reducción de volumen y la eficiencia térmica relativa de cada caja.
-                </li>
-                <li>
-                  Los resultados pueden exportarse en formato Excel, facilitando su análisis, archivo y presentación.
-                </li>
+                <p>
+                  ✔ Permitimos comparar el desempeño térmico de las tres cajas en relación con una línea de base definida por la estructura con el menor rendimiento de aislamiento térmico.
+                </p>
+                <p>
+                  ✔ Visualizamos la pérdida de masa del hielo, la reducción de volumen y la eficiencia térmica relativa de cada caja.
+                </p>
+                <p>
+                  ✔ Los resultados pueden exportarse en formato Excel, facilitando su análisis, archivo y presentación.
+                </p>
               </ul>
               <p>
                 Este evento fue la validación práctica del software. Demostró que es posible combinar sostenibilidad y tecnología para apoyar decisiones de diseño, generar conciencia pública y fomentar la innovación en el sector de la construcción.

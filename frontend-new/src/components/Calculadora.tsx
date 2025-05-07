@@ -177,11 +177,11 @@ const Calculadora: React.FC = () => {
               download
               className={styles.btnPrimary}
             >
-              Descargar plantilla Excel
+              ↓ Descargar plantilla Excel
             </a>
             <div className={styles.fileUpload}>
               <label htmlFor="file-upload" className={styles.btnPrimary}>
-                Subir archivo Excel
+              ↑ Subir archivo Excel
               </label>
               <input
                 id="file-upload"

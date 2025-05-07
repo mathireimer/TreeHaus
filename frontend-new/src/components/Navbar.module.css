@@ -122,19 +122,19 @@
   display: none;
   flex-direction: column;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
   margin-left: 1rem;
-  z-index: 1100;
+  z-index: 100;
 }
 
 .hamburger span {
   height: 4px;
   width: 100%;
   background: #333;
-  margin: 4px 0;
-  border-radius: 2px;
+  margin: 3px 0;
+  border-radius: 12px;
   transition: all 0.3s;
 }
 
@@ -151,9 +151,9 @@
 /* Responsive */
 @media (max-width: 768px) {
   .floatingBox {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
     min-width: 0;
-    width: 98vw;
+    width: 92vw;
     max-width: 98vw;
   }
 
@@ -163,7 +163,7 @@
     right: 16px;
     background: rgba(255,255,255,0.98);
     box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-    border-radius: 16px;
+    border-radius: 10px;
     flex-direction: column;
     gap: 1rem;
     padding: 1rem 2rem;
