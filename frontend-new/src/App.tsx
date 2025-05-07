@@ -2,6 +2,12 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Calculadora from './components/Calculadora';
 import './App.css';
+import caja1 from './assets/caja1.png';
+import caja2 from './assets/caja2.png';
+import caja3 from './assets/caja3.png';
+import video1 from './assets/video1.mp4';
+
+
 
 const App: React.FC = () => {
   return (
@@ -80,17 +86,71 @@ const App: React.FC = () => {
               <p>
                 El evento consistió en exponer durante 10 días tres cajas idénticas en forma y volumen, pero distintas en cuanto a su construcción:
               </p>
-              <ol>
-                <p>
-                  <strong>Caja 1:</strong> Aislamiento convencional, basado en métodos tradicionales del país.
-                </p>
-                <p>
-                  <strong>Caja 2:</strong> Construida conforme a las normas paraguayas de construcción sostenible, reguladas por el INTN (Instituto Nacional de Tecnología, Normalización y Metrología), bajo la propuesta y el impulso del <a href="https://paraguaygbc.org/" target="_blank" rel="noopener noreferrer">Paraguay Green Building Council</a>.
-                </p>
-                <p>
-                  <strong>Caja 3:</strong> Diseñada bajo los exigentes estándares internacionales del Passive House.
-                </p>
-              </ol>
+              <div style={{
+               display: 'flex',
+               justifyContent: 'space-between',
+               gap: '1.5rem',
+               marginTop: '2rem'
+             }}>
+               <div style={{ flex: 1, textAlign: 'center' }}>
+                 <img src={caja1} alt="Caja 1" style={{
+                   width: '100%',
+                   maxWidth: '300px',
+                   borderRadius: '12px',
+                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                   transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                  }} 
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                  }}/>
+                 <p><strong>Caja 1:</strong> Aislamiento convencional, basado en métodos tradicionales del país.</p>
+               </div>
+
+               <div style={{ flex: 1, textAlign: 'center' }}>
+                 <img src={caja2} alt="Caja 2" style={{
+                   width: '100%',
+                   maxWidth: '300px',
+                   borderRadius: '12px',
+                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                   transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                  }} 
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                 }} />
+                 <p><strong>Caja 2:</strong> Construida conforme a las normas paraguayas de construcción sostenible, reguladas por el INTN, bajo el impulso del <a href="https://paraguaygbc.org/" target="_blank" rel="noopener noreferrer">Paraguay Green Building Council</a>.</p>
+               </div>
+
+               <div style={{ flex: 1, textAlign: 'center' }}>
+                 <img src={caja3} alt="Caja 3" style={{
+                   width: '100%',
+                   maxWidth: '300px',
+                   borderRadius: '12px',
+                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                   transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                  }} 
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+                 }} />
+                 <p><strong>Caja 3:</strong> Diseñada bajo los exigentes estándares internacionales del Passive House.</p>
+               </div>
+             </div>
+
+
               <p>
                 En cada caja se colocó un bloque de hielo de igual masa inicial. Al finalizar el desafío, se midió cuánta masa se había conservado en cada una, permitiendo evaluar cuantitativamente la eficiencia térmica de cada sistema constructivo.
               </p>
@@ -109,10 +169,47 @@ const App: React.FC = () => {
               <p>
                 Este evento fue la validación práctica del software. Demostró que es posible combinar sostenibilidad y tecnología para apoyar decisiones de diseño, generar conciencia pública y fomentar la innovación en el sector de la construcción.
               </p>
-              <h3>¿Por qué Paraguay?</h3>
-              <p>
-                Porque en climas extremos como el nuestro, la eficiencia energética no es un lujo, sino una necesidad. Este desafío mostró cómo una herramienta digital puede transformar una demostración física en una oportunidad de aprendizaje y cambio.
-              </p>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                gap: '2rem',
+                marginTop: '3rem'
+              }}>
+                <div style={{ flex: 1 }}>
+                  <h3>¿Por qué Paraguay?</h3>
+                  <p>
+                    Porque en climas extremos como el nuestro, la eficiencia energética no es un lujo, sino una necesidad. 
+                    Este desafío mostró cómo una herramienta digital puede transformar una demostración física en una 
+                    oportunidad de aprendizaje y cambio.
+                  </p>
+                </div>
+
+                <div style={{ flex: 1, textAlign: 'center' }}>
+                  <video
+                    src={video1}
+                    autoPlay
+                    muted
+                    loop
+                    controls
+                    style={{
+                      width: '100%',
+                      maxWidth: '360px',
+                      borderRadius: '12px',
+                      boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
+                      transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.transform = 'scale(1.03)';
+                        e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = 'scale(1)';
+                        e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)';
+                    }}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
