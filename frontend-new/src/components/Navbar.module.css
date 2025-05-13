@@ -8,45 +8,6 @@
   display: flex;
   justify-content: center;
   pointer-events: none; /* Permite que solo la caja flotante reciba eventos */
-  transition: background 0.3s;
-}
-
-.scrolled {
-  background: rgba(255,255,255,0.95);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-  color: #222;
-  transition: background 0.3s, color 0.3s;
-}
-
-.scrolled .logoImg,
-.scrolled .navLinks a {
-  filter: none;
-  color: #222 !important;
-}
-
-.transparent {
-  background: rgba(0,0,0,0.0);
-  box-shadow: none;
-  color: #fff;
-  transition: background 0.3s, color 0.3s;
-}
-
-.transparent .logoImg,
-.transparent .navLinks a {
-  filter: brightness(1000%) invert(1);
-  color: #fff !important;
-}
-
-/* Colores de enlaces y logo según scroll */
-.linkLight {
-  color: #fff !important;
-  filter: brightness(1000%) invert(1);
-  transition: color 0.3s, filter 0.3s;
-}
-.linkDark {
-  color: #222 !important;
-  filter: none;
-  transition: color 0.3s, filter 0.3s;
 }
 
 .floatingBox {
@@ -63,7 +24,6 @@
   max-width: 900px;
   width: 90vw;
   pointer-events: auto; /* Permite interacción */
-  transition: background 0.3s, color 0.3s;
 }
 
 .logo {
@@ -87,15 +47,15 @@
   display: flex;
   gap: 2rem;
   align-items: center;
-  transition: right 0.3s;
 }
 
 .navLinks a {
-  color: #666;
+  color: #333;
   text-decoration: none;
   font-weight: 500;
   position: relative;
   padding: 0.5rem 0;
+  transition: color 0.3s;
 }
 
 .navLinks a::after {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Calculadora from './components/Calculadora';
 import './App.css';
@@ -7,41 +7,90 @@ import caja2 from './assets/caja2.png';
 import caja3 from './assets/caja3.png';
 import video1 from './assets/video1.mp4';
 
-
-
 const App: React.FC = () => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const content = document.querySelector('.content');
+    const handleScroll = () => {
+      if (content) {
+        setScrollPosition((content as HTMLElement).scrollTop);
+      }
+    };
+
+    if (content) {
+      content.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (content) {
+        content.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
+
   return (
-    <div className="app">
+    <div className="app" style={{ 
+      height: '100vh', 
+      overflow: 'hidden',
+      position: 'relative'
+    }}>
       <Navbar />
-      <div className="content">
+      <div className="content" style={{ 
+        height: '100vh',
+        overflowY: 'auto', 
+        scrollBehavior: 'smooth',
+        position: 'relative',
+        zIndex: 1
+      }}>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100vh",
+            zIndex: -1,
+            transform: `translateY(${-scrollPosition * 0.2}px)`,
+          }}
+        >
+          <div style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "url('/bg2.jpg') center center/cover no-repeat"
+          }} />
+          <div style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            background: "rgba(0,0,0,0.75)"
+          }} />
+        </div>
         <section
           id="home"
           className="section"
           style={{
             position: "relative",
-            background: "url('/bg2.jpg') center center/cover no-repeat",
             minHeight: "100vh",
             width: "100%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            zIndex: 1,
             overflow: "hidden"
           }}
         >
-          {/* Superposición oscura */}
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.75)",
-              zIndex: 2
-            }}
-          />
-          <div className="container" style={{ position: "relative", zIndex: 3, padding: "48px 32px", borderRadius: "24px", background: "rgba(0,0,0,0.10)" }}>
+          <div className="container" style={{ 
+            position: "relative", 
+            padding: "48px 32px", 
+            borderRadius: "24px", 
+            background: "rgba(0,0,0,0.10)",
+            zIndex: 2
+          }}>
             <h1 style={{ color: "#fff", textShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
               Transformando la construcción con datos inteligentes
             </h1>
@@ -220,9 +269,15 @@ const App: React.FC = () => {
             </p>
             <h3>Equipo fundador:</h3>
             <ul>
-              <li>Cristina Valiente – Coordinadora técnica, modelado térmico y programación en Python</li>
-              <li>[Nombres de tus compañeros, si quieres agregarlos]</li>
-              <li>Mentoría académica: [Nombre de profesor o departamento, si aplica]</li>
+              <p>• Salomé Valiente - Coordinadora técnica, modelado térmico y programación en Python </p>
+              <p>• Serena Rojas Marcelli - Equipo técnico, modelado térmico y programación en Python </p>
+              <p>• Andrea Sandoval - Equipo técnico, modelado térmico y programación en Python</p>
+              <p>• Mentoria académica: Profesor. Gustavo Sosa</p>
+              <p> </p>
+              <h3>Colaboradores: </h3>
+              <p>• Mathias Reimer - Ing. Informática Empresarial - Diseño Web</p>
+              <p>• Elias Samaniego - Ing. Informática Empresarial - Backend y alojamiento</p>
+              <p>• Hernando Parini - Ing Informática Empresarial - Usabilidad del software y optimización</p>
             </ul>
           </div>
         </section>

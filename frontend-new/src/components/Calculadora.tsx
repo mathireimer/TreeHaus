@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import * as XLSX from 'xlsx';
-import WallAssembly3D from './WallAssembly3D';
 import styles from './Calculadora.module.css';
 
 interface Material {
@@ -316,9 +315,7 @@ const Calculadora: React.FC = () => {
           </div>
         )}
 
-        <div className={styles.visualizacion3D}>
-          <WallAssembly3D materiales={materiales} />
-        </div>
+      
       </div>
     </div>
   );
