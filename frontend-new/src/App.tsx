@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Calculadora from './components/Calculadora';
 import './App.css';
-import caja1 from './assets/caja1.png';
-import caja2 from './assets/caja2.png';
-import caja3 from './assets/caja3.png';
-import video1 from './assets/video1.mp4';
+import CarruselCaja from './components/CarruselCaja';
 
 const App: React.FC = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -28,6 +25,23 @@ const App: React.FC = () => {
       }
     };
   }, []);
+
+  // Definir los archivos de cada caja
+  const archivosCaja1 = [
+    { src: '/assets/caja1.png', tipo: 'imagen' as const, nombre: 'caja1.png' },
+    { src: '/assets/caja1.1.mov', tipo: 'video' as const, nombre: 'caja1.1.mov' },
+    { src: '/assets/caja1.2.jpg', tipo: 'imagen' as const, nombre: 'caja1.2.jpg' },
+  ];
+  const archivosCaja2 = [
+    { src: '/assets/caja2.png', tipo: 'imagen' as const, nombre: 'caja2.png' },
+    { src: '/assets/caja2.1.mov', tipo: 'video' as const, nombre: 'caja2.1.mov' },
+    { src: '/assets/caja2.2.mov', tipo: 'video' as const, nombre: 'caja2.2.mov' },
+  ];
+  const archivosCaja3 = [
+    { src: '/assets/caja3.png', tipo: 'imagen' as const, nombre: 'caja3.png' },
+    { src: '/assets/caja3.1.mov', tipo: 'video' as const, nombre: 'caja3.1.mov' },
+    { src: '/assets/caja3.2.jpg', tipo: 'imagen' as const, nombre: 'caja3.2.jpg' },
+  ];
 
   return (
     <div className="app" style={{ 
@@ -60,7 +74,7 @@ const App: React.FC = () => {
             left: 0,
             width: "100%",
             height: "100%",
-            background: "url('/bg2.jpg') center center/cover no-repeat"
+            background: "url('/bg2.jpg') top center/cover no-repeat"
           }} />
           <div style={{
             position: "absolute",
@@ -139,59 +153,17 @@ const App: React.FC = () => {
                marginTop: '2rem'
              }}>
                <div style={{ flex: 1, textAlign: 'center' }}>
-                 <img src={caja1} alt="Caja 1" style={{
-                   width: '100%',
-                   maxWidth: '300px',
-                   borderRadius: '12px',
-                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                   transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                  }} 
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-                  }}/>
+                 <CarruselCaja archivos={archivosCaja1} />
                  <p><strong>Caja 1:</strong> Aislamiento convencional, basado en métodos tradicionales del país.</p>
                </div>
 
                <div style={{ flex: 1, textAlign: 'center' }}>
-                 <img src={caja2} alt="Caja 2" style={{
-                   width: '100%',
-                   maxWidth: '300px',
-                   borderRadius: '12px',
-                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                   transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                  }} 
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-                 }} />
+                 <CarruselCaja archivos={archivosCaja2} />
                  <p><strong>Caja 2:</strong> Construida conforme a las normas paraguayas de construcción sostenible, reguladas por el INTN, bajo el impulso del <a href="https://paraguaygbc.org/" target="_blank" rel="noopener noreferrer">Paraguay Green Building Council</a>.</p>
                </div>
 
                <div style={{ flex: 1, textAlign: 'center' }}>
-                 <img src={caja3} alt="Caja 3" style={{
-                   width: '100%',
-                   maxWidth: '300px',
-                   borderRadius: '12px',
-                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-                   transition: 'transform 0.3s ease, box-shadow 0.3s ease'
-                  }} 
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
-                 }} />
+                 <CarruselCaja archivos={archivosCaja3} />
                  <p><strong>Caja 3:</strong> Diseñada bajo los exigentes estándares internacionales del Passive House.</p>
                </div>
              </div>
@@ -233,7 +205,7 @@ const App: React.FC = () => {
 
                 <div style={{ flex: 1, textAlign: 'center' }}>
                   <video
-                    src={video1}
+                    src="/assets/video1.mp4"
                     autoPlay
                     muted
                     loop
