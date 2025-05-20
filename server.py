@@ -10,6 +10,10 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}},
      allow_headers=["Content-Type", "Authorization"], 
      methods=["GET", "POST", "OPTIONS"])
 
+@app.route("/")
+def index():
+    return "¡Hola desde Flask en Fly.io!"
+
 @app.route('/calcular', methods=['POST'])
 def procesar_calculo():
     try:
@@ -22,4 +26,4 @@ def procesar_calculo():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
